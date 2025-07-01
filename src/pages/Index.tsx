@@ -5,12 +5,13 @@ import LineChart from "@/components/LineChart";
 import LoadingProgress from "@/components/LoadingProgress";
 import CurrentVoltageChart from "@/components/CurrentVoltageChart";
 import CombinedBodeChart from "@/components/CombinedBodeChart";
-import ExtraLargeMetric from "@/components/ExtraLargeMetric";
+import LargeMetric from "@/components/LargeMetric";
 
 import {
   nyquistData,
   bodeMagnitudeData,
   bodePhaseData,
+  currentVoltageData,
   resultsData,
 } from "@/data/chartData";
 
@@ -41,7 +42,7 @@ const Index = () => {
     <div className="min-h-screen bg-gray-50 p-8 flex flex-col">
       <div className="flex items-center justify-center mb-12">
         <img
-          src="/assets/lohum.jpg"
+          src="/lovable-uploads/66ab9d80-76ce-4910-9876-3c94c2385d94.png"
           alt="LOHUM Logo"
           className="h-32 w-auto object-contain"
         />
@@ -76,7 +77,7 @@ const Index = () => {
     <div className="min-h-screen bg-gray-50 p-8 flex flex-col">
       <div className="flex items-center justify-center mb-8">
         <img
-          src="/assets/lohum.jpg"
+          src="/lovable-uploads/66ab9d80-76ce-4910-9876-3c94c2385d94.png"
           alt="LOHUM Logo"
           className="h-32 w-auto object-contain"
         />
@@ -109,45 +110,46 @@ const Index = () => {
     <div className="min-h-screen bg-gray-50 p-8 flex flex-col">
       <div className="flex items-center justify-center mb-8">
         <img
-          src="/assets/lohum.jpg"
+          src="/lovable-uploads/66ab9d80-76ce-4910-9876-3c94c2385d94.png"
           alt="LOHUM Logo"
           className="h-32 w-auto object-contain"
         />
       </div>
 
       <div className="flex-1 flex flex-col max-w-6xl mx-auto w-full">
-        <div className="flex items-center mb-8">
+        <div className="flex items-center gap-8 mb-6">
           <Button
             onClick={handleBackToStart}
             variant="outline"
-            className="text-lg px-4 py-2 mr-4"
+            className="flex items-center gap-2 text-lg px-6 py-3"
           >
-            <ArrowLeft className="w-5 h-5 mr-2" /> Back to Start
+            <ArrowLeft size={24} />
+            Back to Start
           </Button>
-          <h2 className="text-5xl font-bold text-gray-800">Results</h2>
+          <h2 className="text-3xl font-semibold text-gray-800">Results</h2>
         </div>
 
         <div className="bg-white border border-gray-400 rounded-lg p-6 flex-1">
-          {/* Extra large metrics row at the top of the box */}
-          <div className="flex justify-center items-center mb-10 py-8 border-b border-gray-300">
-            <div className="flex flex-wrap items-center justify-center gap-8">
-              <ExtraLargeMetric
+          {/* Large metrics row at the top of the box */}
+          <div className="flex justify-center items-center mb-8 py-6 border-b border-gray-300">
+            <div className="flex flex-wrap items-center justify-center gap-12">
+              <LargeMetric
                 label="SoH:"
                 value={`${resultsData.SoH.toFixed(2)}%`}
                 color="#22c55e"
-                fontSize="66rem"
+                size="xlarge"
               />
-              <ExtraLargeMetric
+              <LargeMetric
                 label="RUL:"
                 value={resultsData.RUL}
                 color="#3b82f6"
-                fontSize="66rem"
+                size="xlarge"
               />
-              <ExtraLargeMetric
+              <LargeMetric
                 label="OCV:"
                 value={`${resultsData.OCV}V`}
                 color="#a855f7"
-                fontSize="66rem"
+                size="xlarge"
               />
             </div>
           </div>

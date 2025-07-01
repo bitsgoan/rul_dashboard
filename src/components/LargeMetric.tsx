@@ -12,19 +12,21 @@ const LargeMetric: React.FC<LargeMetricProps> = ({
   label,
   value,
   color,
-  size = "xxlarge",
+  size = "xlarge",
   inline = false,
 }) => {
   // Font size mapping based on size prop with more dramatic differences
   const fontSizes = {
-    medium: { label: "16px", value: "32px" },
-    large: { label: "18px", value: "48px" },
-    xlarge: { label: "24px", value: "64px" },
-    xxlarge: { label: "32px", value: "128px" },
+    medium: { label: "40px", value: "160px" },
+    large: { label: "64px", value: "256px" },
+    xlarge: { label: "128px", value: "384px" },
+    xxlarge: { label: "256px", value: "512px" },
   };
-  
+
   // Add console log for debugging
-  console.log(`Rendering LargeMetric with size=${size}, fontSize=${fontSizes[size].value}`);
+  console.log(
+    `Rendering LargeMetric with size=${size}, fontSize=${fontSizes[size].value}`
+  );
 
   // Get font sizes based on selected size
   const { label: labelSize, value: valueSize } = fontSizes[size];
@@ -49,7 +51,8 @@ const LargeMetric: React.FC<LargeMetricProps> = ({
             color: color,
             lineHeight: 1,
             display: "inline-block", // Ensure proper rendering
-            textShadow: size === "xxlarge" ? "0 2px 4px rgba(0,0,0,0.1)" : "none",
+            textShadow:
+              size === "xxlarge" ? "0 2px 4px rgba(0,0,0,0.1)" : "none",
           }}
         >
           {value}

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 
 interface ExtraLargeMetricProps {
   label: string;
@@ -19,15 +19,48 @@ const ExtraLargeMetric: React.FC<ExtraLargeMetricProps> = ({
   // Add debugging to check what's being rendered
   console.log(`Rendering ExtraLargeMetric: ${label} = ${value}, fontSize: ${fontSize}`);
 
-  // Use effect to adjust font size if needed
+  // Use effect to inject custom CSS that overrides global styles
   useEffect(() => {
-    // Force a repaint to ensure proper rendering
+    // Create a unique ID for this instance
+    const uniqueId = `metric-${Math.random().toString(36).substring(2, 9)}`;
+    
+    // Add a unique class to the value element
+    if (valueRef.current) {
+      valueRef.current.classList.add(uniqueId);
+    }
+    
+    // Create a style element with !important rules
+    const style = document.createElement('style');
+    style.innerHTML = `
+      .${uniqueId} {
+        font-size: ${fontSize} !important;
+        font-weight: 900 !important;
+        line-height: 0.9 !important;
+        color: ${color} !important;
+        display: block !important;
+        text-align: center !important;
+        width: 100% !important;
+        overflow: visible !important;
+        text-shadow: 0 4px 8px rgba(0,0,0,0.15) !important;
+        letter-spacing: -0.02em !important;
+        white-space: nowrap !important;
+      }
+    `;
+    document.head.appendChild(style);
+    
+    // Log the actual size after rendering
     setTimeout(() => {
       if (valueRef.current) {
         console.log(`${label} element width: ${valueRef.current.offsetWidth}px, height: ${valueRef.current.offsetHeight}px`);
+        console.log(`Applied styles with class: ${uniqueId}`);
       }
     }, 100);
-  }, [label, value, fontSize]);
+    
+    // Clean up
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, [label, value, fontSize, color]);
 
   return (
     <div 
@@ -43,20 +76,7 @@ const ExtraLargeMetric: React.FC<ExtraLargeMetricProps> = ({
       <div className="text-4xl font-medium text-gray-600 mb-2">{label}</div>
       <div
         ref={valueRef}
-        style={{
-          fontSize,
-          fontWeight: 900,
-          lineHeight: "0.9",
-          color,
-          display: "block",
-          textAlign: "center",
-          width: "100%",
-          overflow: "visible",
-          textShadow: "0 4px 8px rgba(0,0,0,0.15)",
-          letterSpacing: "-0.02em",
-          whiteSpace: "nowrap",
-          transform: "scale(0.9)", // Slightly scale down to fit better
-        }}
+        // We'll apply styles via the dynamic CSS class
       >
         {value}
       </div>
