@@ -5,6 +5,8 @@ import LineChart from "@/components/LineChart";
 import LoadingProgress from "@/components/LoadingProgress";
 import CurrentVoltageChart from "@/components/CurrentVoltageChart";
 import CombinedBodeChart from "@/components/CombinedBodeChart";
+import ExtraLargeMetric from "@/components/ExtraLargeMetric";
+
 import {
   nyquistData,
   bodeMagnitudeData,
@@ -39,7 +41,7 @@ const Index = () => {
     <div className="min-h-screen bg-gray-50 p-8 flex flex-col">
       <div className="flex items-center justify-center mb-12">
         <img
-          src="/lovable-uploads/66ab9d80-76ce-4910-9876-3c94c2385d94.png"
+          src="/assets/lohum.jpg"
           alt="LOHUM Logo"
           className="h-32 w-auto object-contain"
         />
@@ -74,7 +76,7 @@ const Index = () => {
     <div className="min-h-screen bg-gray-50 p-8 flex flex-col">
       <div className="flex items-center justify-center mb-8">
         <img
-          src="/lovable-uploads/66ab9d80-76ce-4910-9876-3c94c2385d94.png"
+          src="/assets/lohum.jpg"
           alt="LOHUM Logo"
           className="h-32 w-auto object-contain"
         />
@@ -107,48 +109,49 @@ const Index = () => {
     <div className="min-h-screen bg-gray-50 p-8 flex flex-col">
       <div className="flex items-center justify-center mb-8">
         <img
-          src="/lovable-uploads/66ab9d80-76ce-4910-9876-3c94c2385d94.png"
+          src="/assets/lohum.jpg"
           alt="LOHUM Logo"
           className="h-32 w-auto object-contain"
         />
       </div>
 
       <div className="flex-1 flex flex-col max-w-6xl mx-auto w-full">
-        <div className="flex items-center gap-8 mb-6">
+        <div className="flex items-center mb-8">
           <Button
             onClick={handleBackToStart}
             variant="outline"
-            className="flex items-center gap-2 text-lg px-6 py-3"
+            className="text-lg px-4 py-2 mr-4"
           >
-            <ArrowLeft size={24} />
-            Back to Start
+            <ArrowLeft className="w-5 h-5 mr-2" /> Back to Start
           </Button>
-          <h2 className="text-3xl font-semibold text-gray-800">Results</h2>
-
-          {/* Parameters Display - inline with Results */}
-          <div className="flex gap-12 text-xl ml-8">
-            <div className="flex flex-col items-center">
-              <span className="font-medium text-gray-600 text-lg">SoH:</span>
-              <span className="text-3xl font-bold text-green-600">
-                {resultsData.SoH.toFixed(2)}%
-              </span>
-            </div>
-            <div className="flex flex-col items-center">
-              <span className="font-medium text-gray-600 text-lg">RUL:</span>
-              <span className="text-2xl font-semibold">
-                {resultsData.placeholder3}
-              </span>
-            </div>
-            <div className="flex flex-col items-center">
-              <span className="font-medium text-gray-600 text-lg">OCV:</span>
-              <span className="text-2xl font-semibold">
-                {resultsData.ocv.toFixed(2)}V
-              </span>
-            </div>
-          </div>
+          <h2 className="text-5xl font-bold text-gray-800">Results</h2>
         </div>
 
         <div className="bg-white border border-gray-400 rounded-lg p-6 flex-1">
+          {/* Extra large metrics row at the top of the box */}
+          <div className="flex justify-center items-center mb-10 py-8 border-b border-gray-300">
+            <div className="flex flex-wrap items-center justify-center gap-8">
+              <ExtraLargeMetric
+                label="SoH:"
+                value={`${resultsData.SoH.toFixed(2)}%`}
+                color="#22c55e"
+                fontSize="66rem"
+              />
+              <ExtraLargeMetric
+                label="RUL:"
+                value={resultsData.RUL}
+                color="#3b82f6"
+                fontSize="66rem"
+              />
+              <ExtraLargeMetric
+                label="OCV:"
+                value={`${resultsData.OCV}V`}
+                color="#a855f7"
+                fontSize="66rem"
+              />
+            </div>
+          </div>
+
           <div className="grid grid-cols-2 gap-8 h-full">
             <div className="bg-gray-50 border border-gray-300 rounded-lg p-4 flex flex-col">
               <h3 className="text-xl font-semibold mb-4 text-gray-700 text-center">
