@@ -42,7 +42,7 @@ const Index = () => {
     <div className="min-h-screen bg-gray-50 p-8 flex flex-col">
       <div className="flex items-center justify-center mb-12">
         <img
-          src="/lovable-uploads/66ab9d80-76ce-4910-9876-3c94c2385d94.png"
+          src="/assets/lohum.jpg"
           alt="LOHUM Logo"
           className="h-32 w-auto object-contain"
         />
@@ -77,7 +77,7 @@ const Index = () => {
     <div className="min-h-screen bg-gray-50 p-8 flex flex-col">
       <div className="flex items-center justify-center mb-8">
         <img
-          src="/lovable-uploads/66ab9d80-76ce-4910-9876-3c94c2385d94.png"
+          src="/assets/lohum.jpg"
           alt="LOHUM Logo"
           className="h-32 w-auto object-contain"
         />
@@ -110,7 +110,7 @@ const Index = () => {
     <div className="min-h-screen bg-gray-50 p-8 flex flex-col">
       <div className="flex items-center justify-center mb-8">
         <img
-          src="/lovable-uploads/66ab9d80-76ce-4910-9876-3c94c2385d94.png"
+          src="/assets/lohum.jpg"
           alt="LOHUM Logo"
           className="h-32 w-auto object-contain"
         />
@@ -137,19 +137,19 @@ const Index = () => {
                 label="SoH:"
                 value={`${resultsData.SoH.toFixed(2)}%`}
                 color="#22c55e"
-                size="xlarge"
+                size="large"
               />
               <LargeMetric
                 label="RUL:"
                 value={resultsData.RUL}
                 color="#3b82f6"
-                size="xlarge"
+                size="large"
               />
               <LargeMetric
                 label="OCV:"
                 value={`${resultsData.OCV}V`}
                 color="#a855f7"
-                size="xlarge"
+                size="large"
               />
             </div>
           </div>

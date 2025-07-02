@@ -1,4 +1,9 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
+
+// ===== CHANGE THIS VALUE TO ADJUST ALL METRIC SIZES =====
+// This is the single location to control font size
+const METRIC_SIZE_MULTIPLIER = 1.0; // 1.0 = default, 2.0 = twice as large, 0.5 = half size
+// =====================================================
 
 interface LargeMetricProps {
   label: string;
@@ -15,21 +20,71 @@ const LargeMetric: React.FC<LargeMetricProps> = ({
   size = "xlarge",
   inline = false,
 }) => {
-  // Font size mapping based on size prop with more dramatic differences
-  const fontSizes = {
-    medium: { label: "40px", value: "160px" },
-    large: { label: "64px", value: "256px" },
-    xlarge: { label: "128px", value: "384px" },
-    xxlarge: { label: "256px", value: "512px" },
+  const valueRef = useRef<HTMLDivElement>(null);
+
+  // Base font sizes - these will be multiplied by METRIC_SIZE_MULTIPLIER
+  const baseFontSizes = {
+    medium: { label: "24px", value: "32px" },
+    large: { label: "28px", value: "40px" },
+    xlarge: { label: "32px", value: "48px" },
+    xxlarge: { label: "36px", value: "56px" },
   };
 
-  // Add console log for debugging
-  console.log(
-    `Rendering LargeMetric with size=${size}, fontSize=${fontSizes[size].value}`
-  );
+  // Calculate actual font sizes based on multiplier
+  const getFontSize = (size: string) => {
+    const numericSize = parseInt(size);
+    return `${Math.round(numericSize * METRIC_SIZE_MULTIPLIER)}px`;
+  };
 
-  // Get font sizes based on selected size
-  const { label: labelSize, value: valueSize } = fontSizes[size];
+  const labelSize = getFontSize(baseFontSizes[size].label);
+  const valueSize = getFontSize(baseFontSizes[size].value);
+
+  // Use effect to inject custom CSS that overrides global styles
+  useEffect(() => {
+    // Create a unique ID for this instance
+    const uniqueId = `metric-${Math.random().toString(36).substring(2, 9)}`;
+
+    // Add a unique class to the value element
+    if (valueRef.current) {
+      valueRef.current.classList.add(uniqueId);
+    }
+
+    // Create a style element with !important rules
+    const style = document.createElement("style");
+    style.innerHTML = `
+      .${uniqueId} {
+        font-size: ${valueSize} !important;
+        font-weight: 900 !important;
+        line-height: 0.9 !important;
+        color: ${color} !important;
+        display: block !important;
+        text-align: center !important;
+        width: 100% !important;
+        overflow: visible !important;
+        text-shadow: 0 4px 8px rgba(0,0,0,0.15) !important;
+        letter-spacing: -0.02em !important;
+        white-space: nowrap !important;
+      }
+    `;
+    document.head.appendChild(style);
+
+    // Log the actual size after rendering
+    setTimeout(() => {
+      if (valueRef.current) {
+        console.log(
+          `${label} element width: ${valueRef.current.offsetWidth}px, height: ${valueRef.current.offsetHeight}px`
+        );
+        console.log(
+          `Applied styles with class: ${uniqueId}, font size: ${valueSize}`
+        );
+      }
+    }, 100);
+
+    // Clean up
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, [label, value, valueSize, color]);
 
   if (inline) {
     return (
@@ -44,19 +99,12 @@ const LargeMetric: React.FC<LargeMetricProps> = ({
         >
           {label}
         </span>
-        <span
-          style={{
-            fontSize: valueSize,
-            fontWeight: 900,
-            color: color,
-            lineHeight: 1,
-            display: "inline-block", // Ensure proper rendering
-            textShadow:
-              size === "xxlarge" ? "0 2px 4px rgba(0,0,0,0.1)" : "none",
-          }}
+        <div
+          ref={valueRef}
+          // Styles will be applied via dynamic CSS
         >
           {value}
-        </span>
+        </div>
       </div>
     );
   }
@@ -81,13 +129,8 @@ const LargeMetric: React.FC<LargeMetricProps> = ({
         {label}
       </div>
       <div
-        style={{
-          fontSize: valueSize,
-          fontWeight: 700,
-          color: color,
-          lineHeight: "0.9",
-          textAlign: "center",
-        }}
+        ref={valueRef}
+        // Styles will be applied via dynamic CSS
       >
         {value}
       </div>
