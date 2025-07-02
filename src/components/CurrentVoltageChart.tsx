@@ -5,6 +5,9 @@ import {
   XAxis,
   YAxis,
   ResponsiveContainer,
+  CartesianGrid,
+  Tooltip,
+  Legend,
 } from "recharts";
 import { ChartDataPoint } from "@/data/chartData";
 import { currentVoltageData } from "@/data/chartData";
@@ -18,6 +21,27 @@ const CurrentVoltageChart: React.FC<CurrentVoltageChartProps> = ({
 }) => {
   const [data, setData] = useState<ChartDataPoint[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [chartHeight, setChartHeight] = useState(0);
+
+  // Set chart height on mount
+  useEffect(() => {
+    // Set a fixed height for the chart container
+    setChartHeight(400);
+    
+    // Initialize with some data points immediately
+    const initialPoints = 30;
+    const initialData: ChartDataPoint[] = [];
+    
+    for (let i = 0; i < initialPoints && i < currentVoltageData.current.length; i++) {
+      initialData.push({
+        x: currentVoltageData.voltage[i],
+        y: currentVoltageData.current[i],
+      });
+    }
+    
+    setData(initialData);
+    setCurrentIndex(initialPoints);
+  }, []);
 
   useEffect(() => {
     if (currentIndex >= currentVoltageData.current.length) {
@@ -62,18 +86,29 @@ const CurrentVoltageChart: React.FC<CurrentVoltageChartProps> = ({
   const voltagePadding = (voltageMax - voltageMin) * 0.1;
   const currentPadding = (currentMax - currentMin) * 0.1;
 
-  console.log("Chart data:", data);
+  console.log("Chart data points:", data.length);
   console.log("Current index:", currentIndex);
   console.log("Voltage range:", voltageMin, voltageMax);
   console.log("Current range:", currentMin, currentMax);
 
+  // If no data, show a loading message
+  if (data.length === 0) {
+    return (
+      <div className="w-full h-full flex items-center justify-center">
+        <p className="text-xl font-semibold text-gray-600">Loading chart data...</p>
+      </div>
+    );
+  }
+
   return (
-    <div className="w-full h-full relative">
+    <div className="w-full" style={{ height: `${chartHeight}px` }}>
+      <h2 className="text-xl font-bold mb-4 text-center">Current vs Voltage Analysis</h2>
       <ResponsiveContainer width="100%" height="100%">
         <RechartsLineChart
           data={data}
           margin={{ top: 15, right: 25, left: 40, bottom: 35 }}
         >
+          <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
           <XAxis
             dataKey="x"
             type="number"
@@ -111,14 +146,21 @@ const CurrentVoltageChart: React.FC<CurrentVoltageChartProps> = ({
               },
             }}
           />
+          <Tooltip 
+            formatter={(value) => [Number(value).toFixed(3), "Current (A)"]}
+            labelFormatter={(label) => `Voltage: ${Number(label).toFixed(3)} V`}
+            contentStyle={{ backgroundColor: "#fff", border: "1px solid #ccc", borderRadius: "4px" }}
+          />
+          <Legend verticalAlign="top" height={36} />
           <Line
+            name="Current vs Voltage"
             type="monotone"
             dataKey="y"
             stroke="#2563eb"
             strokeWidth={3}
-            dot={false}
+            dot={{ r: 1 }}
             activeDot={{ r: 6 }}
-            isAnimationActive={false}
+            isAnimationActive={true}
           />
         </RechartsLineChart>
       </ResponsiveContainer>

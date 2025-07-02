@@ -88,7 +88,8 @@ const Index = () => {
           <LoadingProgress onComplete={() => {}} />
         </div>
 
-        <div className="bg-white border border-gray-400 rounded-lg p-6 flex-1 mb-6">
+        <div className="bg-white border border-gray-400 rounded-lg p-6 flex-1 mb-6" style={{ minHeight: '500px' }}>
+          <h1 className="text-2xl font-bold mb-4 text-center">Battery Analysis in Progress</h1>
           <CurrentVoltageChart onComplete={handleChartComplete} />
         </div>
 
