@@ -48,20 +48,20 @@ const LineChart: React.FC<LineChartProps> = ({
       <ResponsiveContainer width="100%" height="100%">
         <RechartsLineChart
           data={data}
-          margin={{ top: 15, right: 25, left: 35, bottom: 35 }}
+          margin={{ top: 20, right: 30, left: 50, bottom: 50 }}
         >
           <XAxis
             dataKey="x"
             axisLine={true}
             tickLine={true}
-            tick={{ fontSize: 14, fontWeight: 600 }}
+            tick={{ fontSize: 20, fontWeight: 600 }}
             tickFormatter={(value) => formatXValue(Number(value))}
             label={{
               value: xAxisLabel,
               position: "insideBottom",
-              offset: -10,
+              offset: -15,
               style: {
-                fontSize: "16px",
+                fontSize: "22px",
                 fontWeight: "bold",
                 textAnchor: "middle",
               },
@@ -70,14 +70,15 @@ const LineChart: React.FC<LineChartProps> = ({
           <YAxis
             axisLine={true}
             tickLine={true}
-            tick={{ fontSize: 14, fontWeight: 600 }}
+            tick={{ fontSize: 20, fontWeight: 600 }}
             tickFormatter={formatNumber}
             label={{
               value: yAxisLabel,
               angle: -90,
               position: "insideLeft",
+              offset: -35,
               style: {
-                fontSize: "16px",
+                fontSize: "22px",
                 fontWeight: "bold",
                 textAnchor: "middle",
               },
@@ -87,15 +88,15 @@ const LineChart: React.FC<LineChartProps> = ({
             type="monotone"
             dataKey="y"
             stroke={color}
-            strokeWidth={3}
-            dot={false}
-            activeDot={{ r: 6 }}
+            strokeWidth={4}
+            dot={{ r: 2 }}
+            activeDot={{ r: 8 }}
           />
         </RechartsLineChart>
       </ResponsiveContainer>
 
       {units && (
-        <div className="absolute top-2 right-2 bg-white border border-gray-300 px-2 py-1 rounded text-sm font-bold shadow-sm">
+        <div className="absolute top-2 right-2 bg-white border border-gray-300 px-3 py-2 rounded text-base font-bold shadow-sm">
           {units}
         </div>
       )}

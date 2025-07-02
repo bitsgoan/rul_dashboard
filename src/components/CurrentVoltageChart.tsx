@@ -102,11 +102,11 @@ const CurrentVoltageChart: React.FC<CurrentVoltageChartProps> = ({
 
   return (
     <div className="w-full" style={{ height: `${chartHeight}px` }}>
-      <h2 className="text-xl font-bold mb-4 text-center">Current vs Voltage Analysis</h2>
+      <h2 className="text-3xl font-bold mb-4 text-center">Current vs Voltage Analysis</h2>
       <ResponsiveContainer width="100%" height="100%">
         <RechartsLineChart
           data={data}
-          margin={{ top: 15, right: 25, left: 40, bottom: 35 }}
+          margin={{ top: 20, right: 30, left: 60, bottom: 50 }}
         >
           <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
           <XAxis
@@ -115,14 +115,14 @@ const CurrentVoltageChart: React.FC<CurrentVoltageChartProps> = ({
             domain={[voltageMin - voltagePadding, voltageMax + voltagePadding]}
             axisLine={true}
             tickLine={true}
-            tick={{ fontSize: 14, fontWeight: 500 }}
+            tick={{ fontSize: 20, fontWeight: 500 }}
             tickFormatter={(value) => Number(value).toFixed(2)}
             label={{
               value: "Voltage (V)",
               position: "insideBottom",
-              offset: -20,
+              offset: -25,
               style: {
-                fontSize: "16px",
+                fontSize: "22px",
                 fontWeight: "bold",
                 textAnchor: "middle",
               },
@@ -133,14 +133,15 @@ const CurrentVoltageChart: React.FC<CurrentVoltageChartProps> = ({
             domain={[currentMin - currentPadding, currentMax + currentPadding]}
             axisLine={true}
             tickLine={true}
-            tick={{ fontSize: 14, fontWeight: 500 }}
+            tick={{ fontSize: 20, fontWeight: 500 }}
             tickFormatter={(value) => Number(value).toFixed(2)}
             label={{
               value: "Current (A)",
               angle: -90,
               position: "insideLeft",
+              offset: -45,
               style: {
-                fontSize: "16px",
+                fontSize: "22px",
                 fontWeight: "bold",
                 textAnchor: "middle",
               },
@@ -149,17 +150,31 @@ const CurrentVoltageChart: React.FC<CurrentVoltageChartProps> = ({
           <Tooltip 
             formatter={(value) => [Number(value).toFixed(3), "Current (A)"]}
             labelFormatter={(label) => `Voltage: ${Number(label).toFixed(3)} V`}
-            contentStyle={{ backgroundColor: "#fff", border: "1px solid #ccc", borderRadius: "4px" }}
+            contentStyle={{ 
+              backgroundColor: "#fff", 
+              border: "1px solid #ccc", 
+              borderRadius: "4px",
+              fontSize: "18px",
+              padding: "10px" 
+            }}
           />
-          <Legend verticalAlign="top" height={36} />
+          <Legend 
+            verticalAlign="top" 
+            height={40} 
+            wrapperStyle={{
+              fontSize: "20px",
+              fontWeight: 500,
+              paddingTop: "10px"
+            }}
+          />
           <Line
             name="Current vs Voltage"
             type="monotone"
             dataKey="y"
             stroke="#2563eb"
-            strokeWidth={3}
-            dot={{ r: 1 }}
-            activeDot={{ r: 6 }}
+            strokeWidth={4}
+            dot={{ r: 2 }}
+            activeDot={{ r: 8 }}
             isAnimationActive={true}
           />
         </RechartsLineChart>
