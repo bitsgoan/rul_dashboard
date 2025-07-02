@@ -40,7 +40,7 @@ const Index = () => {
 
   const renderStartScreen = () => (
     <div className="min-h-screen bg-gray-50 p-5 flex flex-col">
-      <div className="flex items-center justify-center mb-5">
+      <div className="flex items-center justify-center mb-8">
         <img
           src="/assets/lohum.jpg"
           alt="LOHUM Logo"
@@ -48,8 +48,8 @@ const Index = () => {
         />
       </div>
 
-      <div className="flex-1 flex flex-col justify-center items-center">
-        <h1 className="text-5xl font-bold mb-6 text-center">
+      <div className="flex flex-col items-center mt-12">
+        <h1 className="text-5xl font-bold mb-8 text-center">
           Real time cell capacity estimation
         </h1>
         {/* <div className="w-80 text-2xl text-gray-600 text-center">
@@ -57,7 +57,7 @@ const Index = () => {
         </div> */}
         <Button
           onClick={handleStart}
-          className="bg-green-400 hover:bg-green-500 text-white rounded-full w-32 h-32 text-2xl font-medium"
+          className="bg-green-400 hover:bg-green-500 text-black rounded-full w-32 h-32 text-2xl font-medium"
         >
           ANALYSE
         </Button>
