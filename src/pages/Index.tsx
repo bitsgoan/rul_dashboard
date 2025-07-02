@@ -11,7 +11,7 @@ import {
   nyquistData,
   bodeMagnitudeData,
   bodePhaseData,
-  rawCurrentVoltageData,
+  currentVoltageData,
   resultsData,
 } from "@/data/chartData";
 
@@ -49,10 +49,12 @@ const Index = () => {
       </div>
 
       <div className="flex-1 flex flex-col justify-center items-center">
-        <h1 className="text-5xl font-bold mb-6 text-center">Real time cell capacity estimation</h1>
-        <div className="w-80 text-2xl text-gray-600 text-center">
+        <h1 className="text-5xl font-bold mb-6 text-center">
+          Real time cell capacity estimation
+        </h1>
+        {/* <div className="w-80 text-2xl text-gray-600 text-center">
           Press on the analyse button to start cell capacity estimation.
-        </div>
+        </div> */}
         <Button
           onClick={handleStart}
           className="bg-green-400 hover:bg-green-500 text-white rounded-full w-32 h-32 text-2xl font-medium"
@@ -78,8 +80,13 @@ const Index = () => {
           <LoadingProgress onComplete={() => {}} />
         </div>
 
-        <div className="bg-white border border-gray-400 rounded-lg p-6 flex-1 mb-4" style={{ minHeight: '500px' }}>
-          <h1 className="text-3xl font-bold mb-4 text-center">Battery Analysis in Progress</h1>
+        <div
+          className="bg-white border border-gray-400 rounded-lg p-6 flex-1 mb-4"
+          style={{ minHeight: "500px" }}
+        >
+          <h1 className="text-3xl font-bold mb-4 text-center">
+            Battery Analysis in Progress
+          </h1>
           <CurrentVoltageChart onComplete={handleChartComplete} />
         </div>
 

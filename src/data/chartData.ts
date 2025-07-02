@@ -11,7 +11,7 @@ export interface BubbleDataPoint {
 }
 
 // Current vs Voltage data for real-time plotting
-export const currentVoltageData = {
+const rawCurrentVoltageData = {
   current: [
     0, 2.59797513, 3.89786171, 3.57737438, -0.1604528, 4.11719391, 3.2678036,
     2.86225662, 1.47028498, 3.40504349, 1.76054471, 1.47924956, 3.02425805,
@@ -51,6 +51,24 @@ export const currentVoltageData = {
     0.48698414, 0.28424551, 0.03889055, 0.42510454, 0.2815663,
   ],
 };
+
+// Current vs Voltage data sorted by voltage values
+export const currentVoltageData = (() => {
+  // Create pairs of voltage and current values
+  const pairs = rawCurrentVoltageData.voltage.map((voltage, index) => ({
+    voltage,
+    current: rawCurrentVoltageData.current[index],
+  }));
+
+  // Sort the pairs by voltage (ascending order)
+  pairs.sort((a, b) => a.voltage - b.voltage);
+
+  // Extract sorted voltage and current arrays
+  return {
+    voltage: pairs.map((pair) => pair.voltage),
+    current: pairs.map((pair) => pair.current),
+  };
+})();
 
 // Nyquist Plot Data (Z_real vs -Z_img)
 export const nyquistData: ChartDataPoint[] = [

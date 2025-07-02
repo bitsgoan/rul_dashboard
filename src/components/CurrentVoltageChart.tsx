@@ -9,8 +9,7 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
-import { ChartDataPoint } from "@/data/chartData";
-import { currentVoltageData } from "@/data/chartData";
+import { ChartDataPoint, currentVoltageData } from "@/data/chartData";
 
 interface CurrentVoltageChartProps {
   onComplete: () => void;
@@ -27,18 +26,22 @@ const CurrentVoltageChart: React.FC<CurrentVoltageChartProps> = ({
   useEffect(() => {
     // Set a fixed height for the chart container
     setChartHeight(400);
-    
+
     // Initialize with some data points immediately
     const initialPoints = 30;
     const initialData: ChartDataPoint[] = [];
-    
-    for (let i = 0; i < initialPoints && i < currentVoltageData.current.length; i++) {
+
+    for (
+      let i = 0;
+      i < initialPoints && i < currentVoltageData.current.length;
+      i++
+    ) {
       initialData.push({
         x: currentVoltageData.voltage[i],
         y: currentVoltageData.current[i],
       });
     }
-    
+
     setData(initialData);
     setCurrentIndex(initialPoints);
   }, []);
@@ -95,14 +98,18 @@ const CurrentVoltageChart: React.FC<CurrentVoltageChartProps> = ({
   if (data.length === 0) {
     return (
       <div className="w-full h-full flex items-center justify-center">
-        <p className="text-xl font-semibold text-gray-600">Loading chart data...</p>
+        <p className="text-xl font-semibold text-gray-600">
+          Loading chart data...
+        </p>
       </div>
     );
   }
 
   return (
     <div className="w-full" style={{ height: `${chartHeight}px` }}>
-      <h2 className="text-3xl font-bold mb-4 text-center">Current vs Voltage Analysis</h2>
+      <h2 className="text-3xl font-bold mb-4 text-center">
+        Current vs Voltage Analysis
+      </h2>
       <ResponsiveContainer width="100%" height="100%">
         <RechartsLineChart
           data={data}
@@ -147,24 +154,24 @@ const CurrentVoltageChart: React.FC<CurrentVoltageChartProps> = ({
               },
             }}
           />
-          <Tooltip 
+          <Tooltip
             formatter={(value) => [Number(value).toFixed(3), "Current (A)"]}
             labelFormatter={(label) => `Voltage: ${Number(label).toFixed(3)} V`}
-            contentStyle={{ 
-              backgroundColor: "#fff", 
-              border: "1px solid #ccc", 
+            contentStyle={{
+              backgroundColor: "#fff",
+              border: "1px solid #ccc",
               borderRadius: "4px",
               fontSize: "18px",
-              padding: "10px" 
+              padding: "10px",
             }}
           />
-          <Legend 
-            verticalAlign="top" 
-            height={40} 
+          <Legend
+            verticalAlign="top"
+            height={40}
             wrapperStyle={{
               fontSize: "20px",
               fontWeight: 500,
-              paddingTop: "10px"
+              paddingTop: "10px",
             }}
           />
           <Line
