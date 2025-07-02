@@ -48,7 +48,7 @@ const Index = () => {
           src="/assets/lohum.png"
           alt="LOHUM Logo"
           className="h-32 w-auto object-contain"
-          style={{ transform: "scale(0.7)" }}
+          style={{ transform: "scale(0.71)" }}
         />
       </div>
 
@@ -76,7 +76,7 @@ const Index = () => {
           src="/assets/lohum.png"
           alt="LOHUM Logo"
           className="h-28 w-auto object-contain"
-          style={{ transform: "scale(0.7)" }}
+          style={{ transform: "scale(0.71)" }}
         />
       </div>
 
@@ -116,7 +116,7 @@ const Index = () => {
           src="/assets/lohum.png"
           alt="LOHUM Logo"
           className="h-28 w-auto object-contain"
-          style={{ transform: "scale(0.7)" }}
+          style={{ transform: "scale(0.71)" }}
         />
       </div>
 
