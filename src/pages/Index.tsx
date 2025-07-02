@@ -54,7 +54,7 @@ const Index = () => {
 
       <div className="flex flex-col items-center mt-12">
         <h1 className="text-5xl font-bold mb-8 text-center">
-          Real time cell capacity estimation
+          Real Time Cell Capacity Estimation
         </h1>
         {/* <div className="w-80 text-2xl text-gray-600 text-center">
           Press on the analyse button to start cell capacity estimation.
