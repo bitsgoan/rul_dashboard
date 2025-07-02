@@ -139,7 +139,8 @@ const Index = () => {
             <div className="flex flex-wrap items-center justify-center gap-12">
               <LargeMetric
                 label="SoH:"
-                value={`${resultsData.SoH.toFixed(2)}%`}
+                value={`${resultsData.SoH.toFixed(0)}%`}
+                subValue={`(±2%)`}
                 color="#22c55e"
                 size="xlarge"
               />
