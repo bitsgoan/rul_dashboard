@@ -26,7 +26,10 @@ const Index = () => {
   };
 
   const handleChartComplete = () => {
-    setShowCheckResults(true);
+    // Add a 2-second delay before showing the Check Results button
+    setTimeout(() => {
+      setShowCheckResults(true);
+    }, 2000);
   };
 
   const handleCheckResults = () => {
@@ -42,7 +45,7 @@ const Index = () => {
     <div className="min-h-screen bg-gray-50 p-5 flex flex-col">
       <div className="flex items-center justify-center mb-8">
         <img
-          src="/assets/lohum.jpg"
+          src="/assets/lohum.png"
           alt="LOHUM Logo"
           className="h-32 w-auto object-contain"
         />
@@ -69,7 +72,7 @@ const Index = () => {
     <div className="min-h-screen bg-gray-50 p-5 flex flex-col">
       <div className="flex items-center justify-center mb-4">
         <img
-          src="/assets/lohum.jpg"
+          src="/assets/lohum.png"
           alt="LOHUM Logo"
           className="h-28 w-auto object-contain"
         />
@@ -108,7 +111,7 @@ const Index = () => {
     <div className="min-h-screen bg-gray-50 p-5 flex flex-col">
       <div className="flex items-center justify-center mb-4">
         <img
-          src="/assets/lohum.jpg"
+          src="/assets/lohum.png"
           alt="LOHUM Logo"
           className="h-28 w-auto object-contain"
         />

@@ -37,14 +37,14 @@ const CombinedBodeChart: React.FC<CombinedBodeChartProps> = ({
             dataKey="frequency"
             axisLine={true}
             tickLine={true}
-            tick={{ fontSize: 14, fontWeight: 600 }}
+            tick={{ fontSize: 20, fontWeight: 600 }}
             tickFormatter={(value) => Number(value).toFixed(2)}
             label={{
               value: "Frequency (Hz)",
               position: "insideBottom",
-              offset: -5,
+              offset: -15,
               style: {
-                fontSize: "16px",
+                fontSize: "22px",
                 fontWeight: "bold",
                 textAnchor: "middle",
               },
@@ -55,14 +55,15 @@ const CombinedBodeChart: React.FC<CombinedBodeChartProps> = ({
             orientation="left"
             axisLine={true}
             tickLine={true}
-            tick={{ fontSize: 14, fontWeight: 600 }}
+            tick={{ fontSize: 20, fontWeight: 600 }}
             tickFormatter={(value) => Number(value).toFixed(2)}
             label={{
               value: "Z_mag (Ω)",
               angle: -90,
               position: "insideLeft",
+              offset: -35,
               style: {
-                fontSize: "16px",
+                fontSize: "22px",
                 fontWeight: "bold",
                 textAnchor: "middle",
               },
@@ -73,14 +74,15 @@ const CombinedBodeChart: React.FC<CombinedBodeChartProps> = ({
             orientation="right"
             axisLine={true}
             tickLine={true}
-            tick={{ fontSize: 14, fontWeight: 600 }}
+            tick={{ fontSize: 20, fontWeight: 600 }}
             tickFormatter={(value) => Number(value).toFixed(2)}
             label={{
               value: "Z_phz (°)",
               angle: 90,
               position: "insideRight",
+              offset: 15,
               style: {
-                fontSize: "16px",
+                fontSize: "22px",
                 fontWeight: "bold",
                 textAnchor: "middle",
               },
@@ -91,7 +93,7 @@ const CombinedBodeChart: React.FC<CombinedBodeChartProps> = ({
             type="monotone"
             dataKey="magnitude"
             stroke="#ef4444"
-            strokeWidth={3}
+            strokeWidth={4}
             dot={false}
             activeDot={{ r: 6 }}
             name="Magnitude (Ω)"
@@ -101,7 +103,7 @@ const CombinedBodeChart: React.FC<CombinedBodeChartProps> = ({
             type="monotone"
             dataKey="phase"
             stroke="#10b981"
-            strokeWidth={3}
+            strokeWidth={4}
             dot={false}
             activeDot={{ r: 6 }}
             name="Phase (°)"
@@ -109,12 +111,12 @@ const CombinedBodeChart: React.FC<CombinedBodeChartProps> = ({
           <Legend
             verticalAlign="top"
             height={30}
-            wrapperStyle={{ fontSize: "14px", fontWeight: "600" }}
+            wrapperStyle={{ fontSize: "18px", fontWeight: "600" }}
           />
         </RechartsLineChart>
       </ResponsiveContainer>
 
-      <div className="absolute top-2 right-2 bg-white border border-gray-300 px-2 py-1 rounded text-sm font-bold shadow-sm">
+      <div className="absolute top-2 right-2 bg-white border border-gray-300 px-3 py-2 rounded text-base font-bold shadow-sm">
         Ω / °
       </div>
     </div>
