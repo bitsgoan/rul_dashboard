@@ -36,23 +36,37 @@ const LargeMetric: React.FC<LargeMetricProps> = ({
     return `${Math.round(numericSize * METRIC_SIZE_MULTIPLIER)}px`;
   };
 
-  const labelSize = getFontSize(baseFontSizes[size].label);
+  // For the specific labels we want to make bigger (SoH, RUL, OCV)
+  const isSpecialLabel = label === "SoH:" || label === "RUL:" || label === "OCV:";
+  
+  // Apply a larger size specifically for these labels
+  const labelSize = isSpecialLabel 
+    ? "48px" 
+    : getFontSize(baseFontSizes[size].label);
   const valueSize = getFontSize(baseFontSizes[size].value);
+
+  // Create refs for both label and value elements
+  const labelRef = useRef<HTMLDivElement>(null);
 
   // Use effect to inject custom CSS that overrides global styles
   useEffect(() => {
-    // Create a unique ID for this instance
-    const uniqueId = `metric-${Math.random().toString(36).substring(2, 9)}`;
+    // Create unique IDs for this instance
+    const valueUniqueId = `metric-value-${Math.random().toString(36).substring(2, 9)}`;
+    const labelUniqueId = `metric-label-${Math.random().toString(36).substring(2, 9)}`;
 
-    // Add a unique class to the value element
+    // Add unique classes to the elements
     if (valueRef.current) {
-      valueRef.current.classList.add(uniqueId);
+      valueRef.current.classList.add(valueUniqueId);
+    }
+    
+    if (labelRef.current) {
+      labelRef.current.classList.add(labelUniqueId);
     }
 
-    // Create a style element with !important rules
+    // Create a style element with !important rules for both label and value
     const style = document.createElement("style");
     style.innerHTML = `
-      .${uniqueId} {
+      .${valueUniqueId} {
         font-size: ${valueSize} !important;
         font-weight: 900 !important;
         line-height: 0.9 !important;
@@ -65,6 +79,14 @@ const LargeMetric: React.FC<LargeMetricProps> = ({
         letter-spacing: -0.02em !important;
         white-space: nowrap !important;
       }
+      
+      .${labelUniqueId} {
+        font-size: ${labelSize} !important;
+        font-weight: ${isSpecialLabel ? 700 : 500} !important;
+        color: #4B5563 !important;
+        margin-bottom: 4px !important;
+        text-align: center !important;
+      }
     `;
     document.head.appendChild(style);
 
@@ -75,7 +97,7 @@ const LargeMetric: React.FC<LargeMetricProps> = ({
           `${label} element width: ${valueRef.current.offsetWidth}px, height: ${valueRef.current.offsetHeight}px`
         );
         console.log(
-          `Applied styles with class: ${uniqueId}, font size: ${valueSize}`
+          `Applied styles with class: ${valueUniqueId}, font size: ${valueSize}`
         );
       }
     }, 100);
@@ -119,12 +141,8 @@ const LargeMetric: React.FC<LargeMetricProps> = ({
       }}
     >
       <div
-        style={{
-          fontSize: labelSize,
-          fontWeight: 500,
-          color: "#4B5563",
-          marginBottom: "4px",
-        }}
+        ref={labelRef}
+        // Styles will be applied via dynamic CSS
       >
         {label}
       </div>

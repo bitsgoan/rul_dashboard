@@ -31,13 +31,13 @@ const CombinedBodeChart: React.FC<CombinedBodeChartProps> = ({
       <ResponsiveContainer width="100%" height="100%">
         <RechartsLineChart
           data={combinedData}
-          margin={{ top: 15, right: 50, left: 70, bottom: 50 }}
+          margin={{ top: 15, right: 40, left: 60, bottom: 60 }}
         >
           <XAxis
             dataKey="frequency"
             axisLine={true}
             tickLine={true}
-            tick={{ fontSize: 20, fontWeight: 600 }}
+            tick={{ fontSize: 16, fontWeight: 600 }}
             tickFormatter={(value) => Number(value).toFixed(2)}
             label={{
               value: "Frequency (Hz)",
@@ -55,13 +55,13 @@ const CombinedBodeChart: React.FC<CombinedBodeChartProps> = ({
             orientation="left"
             axisLine={true}
             tickLine={true}
-            tick={{ fontSize: 20, fontWeight: 600 }}
+            tick={{ fontSize: 16, fontWeight: 600 }}
             tickFormatter={(value) => Number(value).toFixed(2)}
             label={{
               value: "Z_mag (Ω)",
               angle: -90,
               position: "insideLeft",
-              offset: -45,
+              offset: -75,
               style: {
                 fontSize: "20px",
                 fontWeight: "bold",
@@ -74,19 +74,10 @@ const CombinedBodeChart: React.FC<CombinedBodeChartProps> = ({
             orientation="right"
             axisLine={true}
             tickLine={true}
-            tick={{ fontSize: 20, fontWeight: 600 }}
+            tick={{ fontSize: 16, fontWeight: 600 }}
             tickFormatter={(value) => Number(value).toFixed(2)}
-            label={{
-              value: "Z_phz (°)",
-              angle: 90,
-              position: "insideRight",
-              offset: 30,
-              style: {
-                fontSize: "20px",
-                fontWeight: "bold",
-                textAnchor: "middle",
-              },
-            }}
+            // Removed the label to prevent overlapping
+            label={null}
           />
           <Line
             yAxisId="magnitude"
